@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>火车票查询</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="jquery-2.1.0.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".info_1").click(function () {
+                $(".info_2").slideDown(1000);
+            });
+        });
+    </script>
+</head>
+<body>
+
+<datalist id="ide">
+    {% for i in station1 %}
+    <option>{{ i }}</option>
+    {% endfor %}
+</datalist>
+
+<div class="container">
+    <div class="container">
+        <table align="center" border="1px" class="table table-striped">
+            <tr>
+                <form action="#" method="post">
+                    <td width="23%">
+                        出发：<input type="text" name="chu" list="ide" placeholder="请选择地点" autocomplete="off"/>
+                    </td>
+                    <td width="23%">
+                        到达：<input type="text" name="dao" list="ide" placeholder="请选择到达地点" autocomplete="off"/>
+                    </td>
+                    <td>
+                        <label for="meeting">出发日期：</label><input id="meeting" type="date" value="{{ localtime_ }}"
+                                                                 name="time"/>
+                    </td>
+                    <td width="23%">
+                        <select name="type_stu" class="form-control">
+                            <option>普通票</option>
+                            <option>学生票</option>
+                        </select>
+                    </td>
+                    <td width="8%">
+                        <button class="btn btn-default" type="submit" style="width: 100%">查询</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+        <table align="center" border="1px" class="table table-striped" style="text-align: center">
+            {% if data %}
+            <tr>
+                <td colspan="17" style="text-align: center">以下是<font color="red">{{ localtime_ }}</font>日,从<font
+                        color="red">{{ chu }}</font>出发<font color="red">→</font><font color="red">{{ dao }}</font>的火车信息
+                    ({{ type_stu }})
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>车次</td>
+                <td>出发站</td>
+                <td>到达站</td>
+                <td>出发时间</td>
+                <td>到达时间</td>
+                <td>历时</td>
+                <td>特等座</td>
+                <td>一等座</td>
+                <td>二等座</td>
+                <td>高级软卧</td>
+                <td>一等软卧</td>
+                <td>动卧</td>
+                <td>二等硬卧</td>
+                <td>软座</td>
+                <td>硬座</td>
+                <td>无座</td>
+            </tr>
+            {% for i in data %}
+
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td>{{ i[3] }}</td>
+                <td>{{ i[4] }}</td>
+                <td>{{ i[5] }}</td>
+                <td>{{ i[6] }}</td>
+                <td>{{ i[7] }}</td>
+                <td>{{ i[8] }}</td>
+                <td>{{ i[9] }}</td>
+                <td>{{ i[10] }}</td>
+                <td>{{ i[11] }}</td>
+                <td>{{ i[12] }}</td>
+                <td>{{ i[13] }}</td>
+                <td>{{ i[14] }}</td>
+                <td>{{ i[15] }}</td>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</div>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
